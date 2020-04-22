@@ -1,7 +1,7 @@
+from dll_stack import Stack
+from dll_queue import Queue
 import sys
 sys.path.append('../queue_and_stack')
-from dll_queue import Queue
-from dll_stack import Stack
 
 
 class BinarySearchTree:
@@ -10,12 +10,40 @@ class BinarySearchTree:
         self.left = None
         self.right = None
 
-    # Insert the given value into the tree
-    def insert(self, value):
-        pass
+    # # Insert the given value into the tree
+    # # recursive 'insert' implementation
+    # def insert(self, value):
+    #     # base case:
+    #     if self is None:
+    #         self = BinarySearchTree(value)
+    #     # if we aren't at base case, move towards it
+    #     else:
+    #         # self is a node with a value
+    #         # compare the value to the value at this node
+    #         if value < self.value:
+    #             # move to the left
+    #             self.left.insert(value)
+    #         else:
+    #             self.right.insert(value)
+    # # Return True if the tree contains the value
+    # # False if it does not
 
-    # Return True if the tree contains the value
-    # False if it does not
+    def insert(self, value):
+        # self.left and/or self.right need to be valid nodes for us to call insert on them
+        if value < self.value:
+            # check if self.left is a valid node
+            if self.left:
+                self.left.insert(value)
+            else:
+                # we've found valid parking spot
+                self.left = BinarySearchTree(value)
+        # otherwise, value >= self.value
+        else:
+            if self.right:
+                self.right.insert(value)
+            else:
+                self.right = BinarySearchTree(value)
+
     def contains(self, target):
         pass
 
